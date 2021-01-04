@@ -77,7 +77,7 @@
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="171.0" minWidth="10.0" prefWidth="171.0" />
         </columnConstraints>
     </GridPane>
-    <TableView fx:id="PartChoicesAddTable" layoutX="430.0" layoutY="87.0" prefHeight="213.0" prefWidth="450.0">
+    <TableView fx:id="PartChoicesAddTable" layoutX="430.0" layoutY="87.0" prefHeight="195.0" prefWidth="450.0">
         <columns>
             <TableColumn fx:id="ChoicesTableAddPartID" prefWidth="100.0" text="Part ID" />
             <TableColumn fx:id="ChoicesTableAddPartName" prefWidth="100.0" text="Part Name" />
@@ -91,7 +91,7 @@
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="171.0" minWidth="10.0" prefWidth="171.0" />
         </columnConstraints>
     </GridPane>
-        <TableView fx:id="AssociatedPartsTable" layoutX="430.0" layoutY="319.0" prefHeight="201.0" prefWidth="450.0">
+        <TableView fx:id="AssociatedPartsTable" layoutX="430.0" layoutY="340.0" prefHeight="180.0" prefWidth="450.0">
             <columns>
                 <TableColumn fx:id="PartID" prefWidth="100.0" text="Part ID" />
                 <TableColumn fx:id="PartName" prefWidth="100.0" text="Part Name" />
@@ -100,6 +100,11 @@
             </columns>
         </TableView>
    <Button fx:id="RemovePart" layoutX="655.0" layoutY="531.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="194.0" text="Remove Associated Part">
+      <font>
+         <Font size="16.0" />
+      </font>
+   </Button>
+   <Button fx:id="SaveButton1" layoutX="769.0" layoutY="288.0" mnemonicParsing="false" prefWidth="80.0" text="Add">
       <font>
          <Font size="16.0" />
       </font>
