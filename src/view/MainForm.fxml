@@ -1,91 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="561.0" prefWidth="1279.0" xmlns="http://javafx.com/javafx/11.0.1"
-            xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="561.0" prefWidth="1279.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <Label alignment="CENTER" layoutX="39.0" layoutY="78.0" text="Inventory Management System">
         <font>
-            <Font name="System Bold" size="16.0"/>
+            <Font name="System Bold" size="16.0" />
         </font>
     </Label>
-    <AnchorPane layoutX="47.0" layoutY="121.0" prefHeight="347.0" prefWidth="593.0"
-                style="-fx-border-color: black; -fx-border-radius: 10;">
+    <AnchorPane layoutX="47.0" layoutY="121.0" prefHeight="347.0" prefWidth="593.0" style="-fx-border-color: black; -fx-border-radius: 10;">
         <Label layoutX="28.0" layoutY="31.0" text="Parts">
             <font>
-                <Font name="System Bold" size="16.0"/>
+                <Font name="System Bold" size="16.0" />
             </font>
         </Label>
-        <TextField fx:id="SearchPartText" layoutX="337.0" layoutY="27.0" prefHeight="25.0" prefWidth="160.0"
-                   text="Search by Part ID or Name"/>
+        <TextField fx:id="SearchPartText" layoutX="337.0" layoutY="27.0" prefHeight="25.0" prefWidth="160.0" text="Search by Part ID or Name" />
         <TableView fx:id="partsTable" layoutX="10.0" layoutY="73.0" prefHeight="213.0" prefWidth="570.0">
             <columns>
-                <TableColumn fx:id="PartID" prefWidth="129.0" text="Part ID"/>
-                <TableColumn fx:id="PartName" prefWidth="133.0" text="Part Name"/>
-                <TableColumn fx:id="PartInventoryLevel" prefWidth="142.0" text="Inventory Level"/>
-                <TableColumn fx:id="PriceCostPerUnit" prefWidth="176.0" text="Price/Cost per Unit"/>
+                <TableColumn fx:id="PartID" prefWidth="129.0" text="Part ID" />
+                <TableColumn fx:id="PartName" prefWidth="133.0" text="Part Name" />
+                <TableColumn fx:id="PartInventoryLevel" prefWidth="142.0" text="Inventory Level" />
+                <TableColumn fx:id="PriceCostPerUnit" prefWidth="176.0" text="Price/Cost per Unit" />
             </columns>
         </TableView>
         <HBox layoutX="41.0" layoutY="288.0" prefHeight="57.0" prefWidth="518.0">
-            <Button fx:id="AddPart" alignment="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false"
-                    prefHeight="30.0" prefWidth="60.0" text="Add">
+            <Button fx:id="AddPart" alignment="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" text="Add">
                 <HBox.margin>
-                    <Insets left="300.0" right="10.0" top="5.0"/>
+                    <Insets left="300.0" right="10.0" top="5.0" />
                 </HBox.margin>
             </Button>
             <Button fx:id="ModifyPart" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" text="Modify">
                 <HBox.margin>
-                    <Insets right="10.0" top="5.0"/>
+                    <Insets right="10.0" top="5.0" />
                 </HBox.margin>
             </Button>
             <Button fx:id="DeletePart" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" text="Delete">
                 <HBox.margin>
-                    <Insets top="5.0"/>
+                    <Insets top="5.0" />
                 </HBox.margin>
             </Button>
         </HBox>
+      <Button fx:id="AddPart1" alignment="CENTER" layoutX="506.0" layoutY="27.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="53.0" text="Search" />
     </AnchorPane>
-    <AnchorPane layoutX="673.0" layoutY="121.0" prefHeight="347.0" prefWidth="592.0"
-                style="-fx-border-color: black; -fx-border-radius: 10;">
+    <AnchorPane layoutX="673.0" layoutY="121.0" prefHeight="347.0" prefWidth="592.0" style="-fx-border-color: black; -fx-border-radius: 10;">
         <Label layoutX="28.0" layoutY="31.0" text="Products">
             <font>
-                <Font name="System Bold" size="16.0"/>
+                <Font name="System Bold" size="16.0" />
             </font>
         </Label>
-        <TextField fx:id="SearchProductText" layoutX="337.0" layoutY="27.0" prefHeight="25.0" prefWidth="180.0"
-                   text="Search by Product ID or Name"/>
+        <TextField fx:id="SearchProductText" layoutX="327.0" layoutY="27.0" prefHeight="25.0" prefWidth="180.0" text="Search by Product ID or Name" />
         <TableView fx:id="productTable" layoutX="11.0" layoutY="73.0" prefHeight="213.0" prefWidth="570.0">
             <columns>
-                <TableColumn fx:id="ProductID" prefWidth="129.0" text="Product ID"/>
-                <TableColumn fx:id="ProductName" prefWidth="140.0" text="Product Name"/>
-                <TableColumn fx:id="ProductInventoryLevel" prefWidth="133.0" text="Inventory Level"/>
-                <TableColumn fx:id="PricePerUnit" prefWidth="178.0" text="Price/Cost per Unit"/>
+                <TableColumn fx:id="ProductID" prefWidth="129.0" text="Product ID" />
+                <TableColumn fx:id="ProductName" prefWidth="140.0" text="Product Name" />
+                <TableColumn fx:id="ProductInventoryLevel" prefWidth="133.0" text="Inventory Level" />
+                <TableColumn fx:id="PricePerUnit" prefWidth="178.0" text="Price/Cost per Unit" />
             </columns>
         </TableView>
         <HBox layoutX="41.0" layoutY="288.0" prefHeight="57.0" prefWidth="518.0">
-            <Button fx:id="AddProduct" alignment="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false"
-                    prefHeight="30.0" prefWidth="60.0" text="Add">
+            <Button fx:id="AddProduct" alignment="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" text="Add">
                 <HBox.margin>
-                    <Insets left="300.0" right="10.0" top="5.0"/>
+                    <Insets left="300.0" right="10.0" top="5.0" />
                 </HBox.margin>
             </Button>
-            <Button fx:id="ModifyProduct" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0"
-                    text="Modify">
+            <Button fx:id="ModifyProduct" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" text="Modify">
                 <HBox.margin>
-                    <Insets right="10.0" top="5.0"/>
+                    <Insets right="10.0" top="5.0" />
                 </HBox.margin>
             </Button>
-            <Button fx:id="DeleteProduct" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0"
-                    text="Delete">
+            <Button fx:id="DeleteProduct" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" text="Delete">
                 <HBox.margin>
-                    <Insets top="5.0"/>
+                    <Insets top="5.0" />
                 </HBox.margin>
             </Button>
         </HBox>
+      <Button fx:id="AddPart11" alignment="CENTER" layoutX="515.0" layoutY="27.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="53.0" text="Search" />
     </AnchorPane>
-    <Button fx:id="Exit" layoutX="1145.0" layoutY="519.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0"
-            text="Exit"/>
+    <Button fx:id="Exit" layoutX="1145.0" layoutY="519.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" text="Exit" />
 </AnchorPane>
