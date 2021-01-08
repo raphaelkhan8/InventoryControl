@@ -1,2 +1,4 @@
-package controller;public class ModifyProductController {
+package controller;
+
+public class ModifyProductController {
 }
