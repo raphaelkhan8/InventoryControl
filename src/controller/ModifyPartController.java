@@ -1,11 +1,11 @@
 package controller;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.MouseEvent;
 
 public class ModifyPartController {
 
@@ -46,24 +46,23 @@ public class ModifyPartController {
     private TextField IDModifyPartText1;
 
     @FXML
-    void InHouseHandler(ActionEvent event) {
+    void InHouseHandler(MouseEvent event) {
 
     }
 
     @FXML
-    void OutsourcedHandler(ActionEvent event) {
+    void OutsourcedHandler(MouseEvent event) {
 
     }
 
     @FXML
-    void cancelPart(ActionEvent event) {
+    void cancelView(MouseEvent event) {
 
     }
 
     @FXML
-    void savePart(ActionEvent event) {
+    void savePart(MouseEvent event) {
 
     }
 
 }
-

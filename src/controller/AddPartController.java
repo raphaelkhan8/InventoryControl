@@ -6,8 +6,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.MouseEvent;
 
 public class AddPartController {
+
     @FXML
     private RadioButton InHouseRadioButton;
 
@@ -36,33 +38,34 @@ public class AddPartController {
     private TextField MinAddPartText;
 
     @FXML
-    private Button CancelButton;
+    private Button AddPartCancelButton;
 
     @FXML
-    private Button SaveButton;
+    private Button AddPartSaveButton;
 
     @FXML
     private TextField IDAddPartText1;
 
     @FXML
-    void InHouseHandler(ActionEvent event) {
+    void InHouseHandler(MouseEvent event) {
 
     }
 
     @FXML
-    void OutsourcedHandler(ActionEvent event) {
+    void OutsourcedHandler(MouseEvent event) {
 
     }
 
     @FXML
-    void cancelPart(ActionEvent event) {
+    void cancelView(MouseEvent event) {
 
     }
 
     @FXML
-    void savePart(ActionEvent event) {
+    void savePart(MouseEvent event) {
 
     }
 
 }
+
 
