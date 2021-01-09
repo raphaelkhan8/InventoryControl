@@ -123,11 +123,7 @@ public class MainFormController implements Initializable {
         String deletedName = part.getName();
         String deletedPartAlert = deletedName += " has been deleted";
         Inventory.deletePart(part);
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Deleted");
-        alert.setHeaderText("Part Deleted");
-        alert.setContentText(deletedPartAlert);
-        alert.showAndWait();
+        Inventory.alertMessage("Deleted", "Part Deleted", deletedPartAlert);
     }
 
     @FXML
@@ -138,11 +134,7 @@ public class MainFormController implements Initializable {
         String deletedName = product.getName();
         String deletedProductAlert = deletedName += " has been deleted";
         Inventory.deleteProduct(product);
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Deleted");
-        alert.setHeaderText("Product Deleted");
-        alert.setContentText(deletedProductAlert);
-        alert.showAndWait();
+        Inventory.alertMessage("Deleted", "Product Deleted", deletedProductAlert);
     }
 
     @FXML
@@ -183,11 +175,7 @@ public class MainFormController implements Initializable {
             // else, alert the user that the input Part was not found
         } else {
             String partSearchErrorText = partSearchInput + " was not found";
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Part not found");
-            alert.setContentText(partSearchErrorText);
-            alert.showAndWait();
+            Inventory.alertMessage("Error", "Part not Found :(", partSearchErrorText);
         }
     }
 
@@ -204,12 +192,8 @@ public class MainFormController implements Initializable {
             productTable.setItems(foundProduct);
             // else, alert the user that the input Product was not found
         } else {
-            String partSearchErrorText = productSearchInput + " was not found";
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Part not found");
-            alert.setContentText(partSearchErrorText);
-            alert.showAndWait();
+            String productSearchErrorText = productSearchInput + " was not found";
+            Inventory.alertMessage("Error", "Product not Found :(", productSearchErrorText);
         }
     }
 
