@@ -40,11 +40,10 @@ public class Inventory {
     }
 
     // loop through Parts array and return the part (as an array) if it's name matches the passed-in name
-    public ObservableList<Part> lookupPart(String partName) {
+    public static ObservableList<Part> lookupPart(String partName) {
         ObservableList<Part> foundParts = FXCollections.observableArrayList();
         for (Part part: allParts) {
-            String name = part.getName();
-            if (name == partName) {
+            if (part.getName().equals(partName)) {
                 foundParts.add(part);
             }
         }
@@ -52,11 +51,10 @@ public class Inventory {
     }
 
     // loop through Products array and return the product (as an array) if it's name matches the passed-in name
-    public ObservableList<Product> lookupProduct(String productName) {
+    public static ObservableList<Product> lookupProduct(String productName) {
         ObservableList<Product> foundProducts = FXCollections.observableArrayList();
         for (Product product: allProducts) {
-            String name = product.getName();
-            if (name == productName) {
+            if (product.getName().equals(productName)) {
                 foundProducts.add(product);
             }
         }

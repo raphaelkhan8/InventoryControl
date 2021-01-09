@@ -1,5 +1,7 @@
 package controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -165,12 +167,46 @@ public class MainFormController implements Initializable {
 
     @FXML
     void searchPart(MouseEvent event) {
-
+        // Parts Table search box functionality:
+        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+        // Capture search box input
+        String partSearchInput = partSearchInputBox.getText();
+        // Container for search output:
+        ObservableList<Part> foundPart = Inventory.lookupPart(partSearchInput);
+        // if Part is found, populate Parts table with only the found Part
+        if (!foundPart.isEmpty()) {
+            partsTable.setItems(foundPart);
+            // else, alert the user that the input Part was not found
+        } else {
+            String partSearchErrorText = partSearchInput + " was not found";
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Part not found");
+            alert.setContentText(partSearchErrorText);
+            alert.showAndWait();
+        }
     }
 
     @FXML
     void searchProduct(MouseEvent event) {
-
+        // Products Table search box functionality:
+        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+        // Capture search box input
+        String productSearchInput = productSearchInputBox.getText();
+        // Container for search output:
+        ObservableList<Product> foundProduct = Inventory.lookupProduct(productSearchInput);
+        // if Product is found, populate Products table with only the found Product
+        if (!foundProduct.isEmpty()) {
+            productTable.setItems(foundProduct);
+            // else, alert the user that the input Product was not found
+        } else {
+            String partSearchErrorText = productSearchInput + " was not found";
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Part not found");
+            alert.setContentText(partSearchErrorText);
+            alert.showAndWait();
+        }
     }
 
     // override JavaFX's initialize to populate main form with sample data

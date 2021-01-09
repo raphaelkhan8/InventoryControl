@@ -35,10 +35,10 @@ public class Main extends Application {
 
         // InHouse Parts //
         // create in-house part instances
-        Part inHouse1 = new InHouse(1, "In-house part 1", 2.50, 50, 25, 150, 101);
-        Part inHouse2 = new InHouse(2, "In-house part 2", 5.00, 40, 10, 100, 102);
-        Part inHouse3 = new InHouse(3, "In-house part 3", 10.99, 5, 4, 20, 103);
-        Part inHouse4 = new InHouse(4, "In-house part 4", 6.00, 12, 10, 80, 104);
+        Part inHouse1 = new InHouse(1, "IP1", 2.50, 50, 25, 150, 101);
+        Part inHouse2 = new InHouse(2, "IP2", 5.00, 40, 10, 100, 102);
+        Part inHouse3 = new InHouse(3, "IP3", 10.99, 5, 4, 20, 103);
+        Part inHouse4 = new InHouse(4, "IP4", 6.00, 12, 10, 80, 104);
         // add the parts to inventory
         Inventory.addPart(inHouse1);
         Inventory.addPart(inHouse2);
@@ -47,10 +47,10 @@ public class Main extends Application {
 
         // Outsourced Parts //
         // create outsourced part instances
-        Part outsourced1 = new Outsourced(5, "Outsourced part 1", 4.50, 48, 25, 150, "Acme Co");
-        Part outsourced2 = new Outsourced(6, "Outsourced part 2", 5.50, 28, 10, 100, "Company Co");
-        Part outsourced3 = new Outsourced(7, "Outsourced part 3", 6.50, 18, 4, 20, "Business Co");
-        Part outsourced4 = new Outsourced(8, "Outsourced part 4", 8.50, 48, 45, 80, "Co Co");
+        Part outsourced1 = new Outsourced(5, "OP1", 4.50, 48, 25, 150, "Acme Co");
+        Part outsourced2 = new Outsourced(6, "OP2", 5.50, 28, 10, 100, "Company Co");
+        Part outsourced3 = new Outsourced(7, "OP3", 6.50, 18, 4, 20, "Business Co");
+        Part outsourced4 = new Outsourced(8, "OP4", 8.50, 48, 45, 80, "Co Co");
         // add the outsourced parts to inventory
         Inventory.addPart(outsourced1);
         Inventory.addPart(outsourced2);
@@ -59,9 +59,9 @@ public class Main extends Application {
 
         // Products //
         // create product instances
-        Product p1 = new Product(1, "Product 1", 10.00, 48, 20, 120);
-        Product p2 = new Product(2, "Product 2", 15.00, 28, 10, 100);
-        Product p3 = new Product(3, "Product 3", 20.00, 5, 2, 80);
+        Product p1 = new Product(1, "P1", 10.00, 48, 20, 120);
+        Product p2 = new Product(2, "P2", 15.00, 28, 10, 100);
+        Product p3 = new Product(3, "P3", 20.00, 5, 2, 80);
         // associate parts with each product
         p1.addAssociatedPart(inHouse1);
         p1.addAssociatedPart(outsourced1);
