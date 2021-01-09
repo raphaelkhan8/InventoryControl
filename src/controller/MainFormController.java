@@ -22,6 +22,8 @@ public class MainFormController implements Initializable {
 
     Stage stage;
     Parent scene;
+    // container for a modified Part/Product's index
+    protected static int chosenIndex;
 
     @FXML
     private Button exitButton;
@@ -145,8 +147,10 @@ public class MainFormController implements Initializable {
 
     @FXML
     void modifyPart(MouseEvent event) throws IOException {
-        // open up the Modify Product form when part table's Modify button is clicked
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+        // capture the chosen Part to be modified
+        chosenIndex = Inventory.getAllParts().indexOf((partsTable.getSelectionModel().getSelectedItem()));
+        // open up the Modify Product form when part table's Modify button is clicked
         scene = FXMLLoader.load(getClass().getResource("/view/ModifyPart.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
@@ -154,8 +158,10 @@ public class MainFormController implements Initializable {
 
     @FXML
     void modifyProduct(MouseEvent event) throws IOException {
-        // open up the Modify Product form when product table's Modify button is clicked
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+        // capture the chosen Product to be modified
+        chosenIndex = Inventory.getAllProducts().indexOf((productTable.getSelectionModel().getSelectedItem()));
+        // open up the Modify Product form when product table's Modify button is clicked
         scene = FXMLLoader.load(getClass().getResource("/view/ModifyProduct.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
