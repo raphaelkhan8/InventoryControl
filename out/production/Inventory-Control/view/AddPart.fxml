@@ -13,7 +13,7 @@
         </font>
     </Label>
     <HBox layoutX="194.0" layoutY="46.0" prefHeight="25.0" prefWidth="248.0">
-        <RadioButton fx:id="InHouseRadioButton" alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="20.0" prefWidth="107.0" text=" In-House">
+        <RadioButton fx:id="InHouseRadioButton" alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#InHouseHandler" prefHeight="20.0" prefWidth="107.0" text=" In-House">
             <font>
                 <Font size="14.0" />
             </font>
@@ -24,7 +24,7 @@
                 <ToggleGroup fx:id="RadioButton" />
             </toggleGroup>
         </RadioButton>
-        <RadioButton fx:id="OutsourcedRadioButton" mnemonicParsing="false" prefHeight="20.0" prefWidth="122.0" text=" Outsourced" toggleGroup="$RadioButton">
+        <RadioButton fx:id="OutsourcedRadioButton" mnemonicParsing="false" onMouseClicked="#OutsourcedHandler" prefHeight="20.0" prefWidth="122.0" text=" Outsourced" toggleGroup="$RadioButton">
             <font>
                 <Font size="14.0" />
             </font>
@@ -69,12 +69,12 @@
         <TextField fx:id="MaxAddPartText" prefHeight="25.0" prefWidth="122.0" GridPane.columnIndex="1" />
         <TextField fx:id="MinAddPartText" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="3" />
     </GridPane>
-    <Button fx:id="CancelButton" layoutX="461.0" layoutY="481.0" mnemonicParsing="false" prefWidth="80.0" text="Cancel">
+    <Button fx:id="AddPartCancelButton" layoutX="461.0" layoutY="481.0" mnemonicParsing="false" onMouseClicked="#cancelView" prefWidth="80.0" text="Cancel">
         <font>
             <Font size="16.0" />
         </font>
     </Button>
-    <Button fx:id="SaveButton" layoutX="362.0" layoutY="481.0" mnemonicParsing="false" prefWidth="80.0" text="Save">
+    <Button fx:id="AddPartSaveButton" layoutX="362.0" layoutY="481.0" mnemonicParsing="false" onMouseClicked="#savePart" prefWidth="80.0" text="Save">
         <font>
             <Font size="16.0" />
         </font>
