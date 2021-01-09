@@ -5,7 +5,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="560.0" prefWidth="621.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="560.0" prefWidth="621.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ModifyPartController">
 
     <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="117.0" prefWidth="194.0" text="Modify Part">
         <font>
