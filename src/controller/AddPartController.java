@@ -1,6 +1,5 @@
 package controller;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,6 +7,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import model.InHouse;
+import model.Inventory;
+import model.Outsourced;
 
 import java.io.IOException;
 
@@ -15,6 +17,7 @@ public class AddPartController {
 
     Stage stage;
     Parent scene;
+    String currentView;
 
     @FXML
     private RadioButton InHouseRadioButton;
@@ -59,12 +62,14 @@ public class AddPartController {
     // When In-House radio button is clicked, set label to Machine ID
     void InHouseHandler(MouseEvent event) {
         DynamicAddPartLabel.setText("Machine ID");
+        currentView = "InHouse";
     }
 
     @FXML
     // When Outsourced radio button is clicked, set label to Company Name
     void OutsourcedHandler(MouseEvent event) {
         DynamicAddPartLabel.setText("Company Name");
+        currentView = "Outsourced";
     }
 
     @FXML
@@ -77,8 +82,35 @@ public class AddPartController {
     }
 
     @FXML
-    void savePart(MouseEvent event) {
-
+    void savePart(MouseEvent event) throws IOException {
+        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+        // Capture user input:
+        String partName = new String(NameAddPartText.getText());
+        double partPrice = Double.parseDouble(PriceCostAddPartText.getText());
+        int partInventory = Integer.parseInt(InventoryAddPartText.getText());
+        int partMin = Integer.parseInt(MinAddPartText.getText());
+        int partMax = Integer.parseInt(MaxAddPartText.getText());
+        // get the last Parts ID # and add 1 to it to create the new part's ID
+        int partID = Inventory.getLastId(0) + 1;
+        // if In-House radio button clicked:
+        if (currentView.equals("InHouse")) {
+            // get the input machine ID number
+            int machineId = Integer.parseInt(DynamicAddPartText.getText());
+            // Create a new InHouse instance and add it to Inventory
+            InHouse newIPart = new InHouse(partID, partName, partPrice, partInventory, partMin, partMax, machineId);
+            Inventory.addPart(newIPart);
+            Inventory.alertMessage("Added", "In-House Part Added", partName + " was added to the Inventory");
+        } else {
+            // if Outsourced radio button clicked:
+            String companyName = DynamicAddPartText.getText();
+            Outsourced newOPart = new Outsourced(partID, partName, partPrice, partInventory, partMin, partMax, companyName);
+            Inventory.addPart(newOPart);
+            Inventory.alertMessage("Added", "Outsourced Part Added", partName + " was added to the Inventory");
+        }
+        // go back to main form after the Part is added
+        scene = FXMLLoader.load(getClass().getResource("/view/MainForm.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
     }
 
 }

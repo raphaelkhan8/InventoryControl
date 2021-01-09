@@ -87,7 +87,7 @@ public class AddProductController {
 
     @FXML
     void addPart(MouseEvent event) {
-        
+
     }
 
     @FXML
