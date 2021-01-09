@@ -24,8 +24,6 @@ public class ModifyPartController implements Initializable {
     Parent scene;
     String currentView;
 
-    AddPartController addPartController = new AddPartController();
-
     @FXML
     private RadioButton InHouseRadioButton;
 
@@ -67,16 +65,19 @@ public class ModifyPartController implements Initializable {
 
     @FXML
     void InHouseHandler(MouseEvent event) {
-        addPartController.InHouseHandler(event);
+        DynamicModifyPartLabel.setText("Machine ID");
+        currentView = "InHouse";
     }
 
     @FXML
     void OutsourcedHandler(MouseEvent event) {
-        addPartController.OutsourcedHandler(event);
+        DynamicModifyPartLabel.setText("Company Name");
+        currentView = "Outsourced";
     }
 
     @FXML
     void cancelView(MouseEvent event) throws IOException {
+        AddPartController addPartController = new AddPartController();
         addPartController.cancelView(event);
     }
 
