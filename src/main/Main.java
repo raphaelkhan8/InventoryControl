@@ -9,8 +9,12 @@ import model.*;
 
 public class Main extends Application {
 
+    Inventory sampleInv = new Inventory();
+
     @Override
     public void start(Stage primaryStage) throws Exception{
+        addSampleData(sampleInv);
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/MainForm.fxml"));
         controller.MainFormController controller = new controller.MainFormController();
         loader.setController(controller);
