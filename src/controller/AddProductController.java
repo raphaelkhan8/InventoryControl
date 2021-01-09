@@ -1,13 +1,23 @@
 package controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import controller.AddPartController;
+
+import java.io.IOException;
 
 public class AddProductController {
+
+    Stage stage;
+    Parent scene;
 
     @FXML
     private TextField NameAddProductText;
@@ -77,12 +87,13 @@ public class AddProductController {
 
     @FXML
     void addPart(MouseEvent event) {
-
+        
     }
 
     @FXML
-    void cancelView(MouseEvent event) {
-
+    void cancelView(MouseEvent event) throws IOException {
+        AddPartController controller = new AddPartController();
+        controller.cancelView(event);
     }
 
     @FXML

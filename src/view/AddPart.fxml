@@ -87,7 +87,7 @@
         <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="15.0" vgrow="SOMETIMES" />
         </rowConstraints>
-        <Label text="Machine Id" />
-        <TextField fx:id="IDAddPartText1" editable="false" prefHeight="25.0" prefWidth="124.0" GridPane.columnIndex="1" />
+        <Label fx:id="DynamicAddPartLabel" text="Machine Id" />
+        <TextField fx:id="DynamicAddPartText" editable="false" prefHeight="25.0" prefWidth="124.0" GridPane.columnIndex="1" />
     </GridPane>
 </AnchorPane>

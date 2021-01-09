@@ -16,8 +16,6 @@ public class Main extends Application {
         addSampleData(sampleInv);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/MainForm.fxml"));
-        controller.MainFormController controller = new controller.MainFormController();
-        loader.setController(controller);
         Parent root = loader.load();
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
