@@ -2,13 +2,26 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import model.Inventory;
+import model.Part;
+import model.Product;
 
-public class MainFormController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class MainFormController implements Initializable {
+
+    Stage stage;
+    Parent scene;
 
     @FXML
     private Button exitButton;
@@ -17,7 +30,7 @@ public class MainFormController {
     private TextField partSearchInputBox;
 
     @FXML
-    private TableView<?> partsTable;
+    private TableView<Part> partsTable;
 
     @FXML
     private TableColumn<?, ?> PartID;
@@ -47,7 +60,7 @@ public class MainFormController {
     private TextField productSearchInputBox;
 
     @FXML
-    private TableView<?> productTable;
+    private TableView<Product> productTable;
 
     @FXML
     private TableColumn<?, ?> ProductID;
@@ -128,4 +141,22 @@ public class MainFormController {
 
     }
 
+    // override JavaFX's initialize to populate main form with sample data
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        // Populate Parts table
+        partsTable.setItems(Inventory.getAllParts());
+        PartID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        PartName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        PartInventoryLevel.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        PriceCostPerUnit.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+        //Populate Products table
+        productTable.setItems(Inventory.getAllProducts());
+        ProductID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        ProductName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        ProductInventoryLevel.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        PricePerUnit.setCellValueFactory(new PropertyValueFactory<>("price"));
+    }
 }
