@@ -146,13 +146,21 @@ public class MainFormController implements Initializable {
     }
 
     @FXML
-    void modifyPart(MouseEvent event) {
-
+    void modifyPart(MouseEvent event) throws IOException {
+        // open up the Modify Product form when part table's Modify button is clicked
+        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/view/ModifyPart.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
     }
 
     @FXML
-    void modifyProduct(MouseEvent event) {
-
+    void modifyProduct(MouseEvent event) throws IOException {
+        // open up the Modify Product form when product table's Modify button is clicked
+        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/view/ModifyProduct.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
     }
 
     @FXML
