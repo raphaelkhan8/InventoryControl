@@ -74,12 +74,12 @@ public class Inventory {
     }
 
     // Remove the Part and return a bool indicating whether or not the Part was deleted
-    public boolean deletePart(Part selectedPart) {
+    public static boolean deletePart(Part selectedPart) {
         return allParts.remove(selectedPart);
     }
 
     // Remove the Product and return a bool indicating whether or not the Product was deleted
-    public boolean deleteProduct(Product selectedProduct) {
+    public static boolean deleteProduct(Product selectedProduct) {
         return allProducts.remove(selectedProduct);
     }
 

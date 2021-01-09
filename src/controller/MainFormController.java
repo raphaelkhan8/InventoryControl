@@ -6,10 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -114,12 +111,32 @@ public class MainFormController implements Initializable {
 
     @FXML
     void deletePart(MouseEvent event) {
-
+        // delete the selected Part from parts table and alert user after part is removed
+        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+        Part part = partsTable.getSelectionModel().getSelectedItem();
+        String deletedName = part.getName();
+        String deletedPartAlert = deletedName += " has been deleted";
+        Inventory.deletePart(part);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Deleted");
+        alert.setHeaderText("Part Deleted");
+        alert.setContentText(deletedPartAlert);
+        alert.showAndWait();
     }
 
     @FXML
     void deleteProduct(MouseEvent event) {
-
+        // delete the selected Product from products table and alert user after product is removed
+        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+        Product product = productTable.getSelectionModel().getSelectedItem();
+        String deletedName = product.getName();
+        String deletedProductAlert = deletedName += " has been deleted";
+        Inventory.deleteProduct(product);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Deleted");
+        alert.setHeaderText("Product Deleted");
+        alert.setContentText(deletedProductAlert);
+        alert.showAndWait();
     }
 
     @FXML
