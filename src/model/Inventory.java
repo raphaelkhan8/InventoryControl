@@ -1,7 +1,9 @@
 package model;
 
+import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 
 public class Inventory {
     private static ObservableList<Part> allParts = FXCollections.observableArrayList();
@@ -87,5 +89,29 @@ public class Inventory {
 
     public static ObservableList<Product> getAllProducts() {
         return allProducts;
+    }
+
+    // used to get last part or product's ID in order to set a new ID
+    public static int getLastId(int partsOrProduct) {
+        int lastID;
+        // 0 stands for Part
+        if (partsOrProduct == 0) {
+            int length = allParts.size();
+            lastID = allParts.get(length - 1).getId();
+        } else {
+            // 1 stands for Product
+            int length = allProducts.size();
+            lastID = allProducts.get(length - 1).getId();
+        }
+        return lastID;
+    }
+
+    // for message pop-ups
+    public static void alertMessage(String title, String header, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }
