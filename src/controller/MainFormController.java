@@ -140,13 +140,9 @@ public class MainFormController implements Initializable {
     }
 
     @FXML
-    void exitProgram(ActionEvent event) {
-
-    }
-
-    @FXML
-    void exitProgramButton(MouseEvent event) {
-
+    void exitProgram(MouseEvent event) {
+        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+        stage.close();
     }
 
     @FXML

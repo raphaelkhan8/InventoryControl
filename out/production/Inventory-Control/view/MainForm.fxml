@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="561.0" prefWidth="1279.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-    <Button fx:id="exitButton" layoutX="1162.0" layoutY="493.0" mnemonicParsing="false" onAction="#exitProgram" onMouseClicked="#exitProgramButton" prefHeight="30.0" prefWidth="60.0" text="Exit" />
+    <Button fx:id="exitButton" layoutX="1162.0" layoutY="493.0" mnemonicParsing="false" onMouseClicked="#exitProgram" prefHeight="30.0" prefWidth="60.0" text="Exit" />
     <Label alignment="CENTER" layoutX="39.0" layoutY="78.0" text="Inventory Management System">
         <font>
             <Font name="System Bold" size="16.0" />
