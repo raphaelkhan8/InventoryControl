@@ -108,7 +108,13 @@ public class MainFormController implements Initializable {
 
     @FXML
     void clearText(MouseEvent event) {
-
+        // clear search input box when clicked on
+        Object source = event.getSource();
+        if (source.equals(partSearchInputBox)) {
+            partSearchInputBox.setText("");
+        } else {
+            productSearchInputBox.setText("");
+        }
     }
 
     @FXML
