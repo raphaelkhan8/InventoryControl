@@ -55,19 +55,19 @@ public class AddProductController implements Initializable {
     private Button AddProductSaveButton;
 
     @FXML
-    private TableView<Part> PartChoicesAddTable;
+    private TableView<Part> AllPartsTable;
 
     @FXML
-    private TableColumn<?, ?> ChoicesTableAddPartID;
+    private TableColumn<?, ?> AllPartsPartID;
 
     @FXML
-    private TableColumn<?, ?> ChoicesTableAddPartName;
+    private TableColumn<?, ?> AllPartsPartName;
 
     @FXML
-    private TableColumn<?, ?> ChoicesTableAddInventoryLevel;
+    private TableColumn<?, ?> AllPartsInventoryLevel;
 
     @FXML
-    private TableColumn<?, ?> ChoicesTableAddPricePerUnit;
+    private TableColumn<?, ?> AllPartsPricePerUnit;
 
     @FXML
     private TableView<Part> AssociatedPartsTable;
@@ -99,14 +99,15 @@ public class AddProductController implements Initializable {
     }
 
     @FXML
-    void addPart(MouseEvent event) {
-
-    }
-
-    @FXML
     void cancelView(MouseEvent event) throws IOException {
         AddPartController controller = new AddPartController();
         controller.cancelView(event);
+    }
+
+    @FXML
+    void addPart(MouseEvent event) {
+        int chosenIndex = Inventory.getAllParts().indexOf((AllPartsTable.getSelectionModel().getSelectedItem()));
+        associatedParts.add(Inventory.getAllParts().get(chosenIndex));
     }
 
     @FXML
@@ -118,13 +119,14 @@ public class AddProductController implements Initializable {
         if(foundPartList.isEmpty()) {
             Inventory.alertMessage("Error", "Part not found", partToSearch + " was not found :(");
         } else {
-            PartChoicesAddTable.setItems(foundPartList);
+            AllPartsTable.setItems(foundPartList);
         }
     }
 
     @FXML
     void removePart(MouseEvent event) {
-
+        Part removedPart = AssociatedPartsTable.getSelectionModel().getSelectedItem();
+        associatedParts.remove(removedPart);
     }
 
     @FXML
@@ -135,11 +137,11 @@ public class AddProductController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Populate All Parts table
-        PartChoicesAddTable.setItems(Inventory.getAllParts());
-        ChoicesTableAddPartID.setCellValueFactory(new PropertyValueFactory<>("id"));
-        ChoicesTableAddPartName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        ChoicesTableAddInventoryLevel.setCellValueFactory(new PropertyValueFactory<>("stock"));
-        ChoicesTableAddPricePerUnit.setCellValueFactory(new PropertyValueFactory<>("price"));
+        AllPartsTable.setItems(Inventory.getAllParts());
+        AllPartsPartID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        AllPartsPartName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        AllPartsInventoryLevel.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        AllPartsPricePerUnit.setCellValueFactory(new PropertyValueFactory<>("price"));
 
         // Populate Associated Parts table
         AssociatedPartsTable.setItems(associatedParts);
