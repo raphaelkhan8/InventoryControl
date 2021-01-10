@@ -94,6 +94,11 @@ public class AddProductController implements Initializable {
     private Button AddProductSearchButton;
 
     @FXML
+    void clearText(MouseEvent event) {
+        SearchPartText.setText("");
+    }
+
+    @FXML
     void addPart(MouseEvent event) {
 
     }
