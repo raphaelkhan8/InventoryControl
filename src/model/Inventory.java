@@ -20,7 +20,7 @@ public class Inventory {
     }
 
     // loop through Parts array and return the part if it's id matches the passed-in id
-    public Part lookupPart(int partId) {
+    public static Part lookupPart(int partId) {
         for (Part part : allParts) {
             int id = part.getId();
             if (id == partId) {
@@ -69,7 +69,7 @@ public class Inventory {
     }
 
     // Replace the part at the passed-in index of the Parts array with the passed-in selectedPart
-    public void updateProduct(int index, Product selectedProduct) {
+    public static void updateProduct(int index, Product selectedProduct) {
         allProducts.set(index, selectedProduct);
     }
 

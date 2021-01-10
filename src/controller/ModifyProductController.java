@@ -3,8 +3,10 @@ package controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -17,6 +19,7 @@ import model.Part;
 import model.Product;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -109,22 +112,49 @@ public class ModifyProductController implements Initializable {
 
     @FXML
     void addPart(MouseEvent event) {
-
+        int chosenPartIndex = Inventory.getAllParts().indexOf((AllPartsTable.getSelectionModel().getSelectedItem()));
+        Part chosenPart = Inventory.getAllParts().get(chosenPartIndex);
+        Inventory.getAllProducts().get(modifiedProductIndex).addAssociatedPart(chosenPart);
     }
 
     @FXML
     void lookupPart(MouseEvent event) {
-
+        String partToSearch = SearchPartText.getText();
+        ObservableList<Part> foundPartList;
+        foundPartList = Inventory.lookupPart(partToSearch);
+        // if searched Part isn't found, alert the user
+        if(foundPartList.isEmpty()) {
+            Inventory.alertMessage("Error", "Part not found", partToSearch + " was not found :(");
+        } else {
+            AllPartsTable.setItems(foundPartList);
+        }
     }
 
     @FXML
     void removePart(MouseEvent event) {
-
+        Part part = AssociatedPartsTable.getSelectionModel().getSelectedItem();
+        Inventory.getAllProducts().get(modifiedProductIndex).deleteAssociatedPart(part);
     }
 
     @FXML
-    void saveProduct(MouseEvent event) {
+    void saveProduct(MouseEvent event) throws IOException {
+        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
 
+        // Capture user input:
+        int productID = Integer.parseInt(IDModifyProductText.getText());
+        String productName = NameModifyProductText.getText();
+        double productPrice = Double.parseDouble(PriceCostModifyProductText.getText());
+        int productStock = Integer.parseInt(InventoryModifyProductText.getText());
+        int productMin = Integer.parseInt(MinModifyProductText.getText());
+        int productMax = Integer.parseInt(MaxModifyProductText.getText());
+        // Create a new Product instance using user input and replace the old one with new one
+        Product product = new Product(productID, productName, productPrice, productStock, productMin, productMax);
+        Inventory.updateProduct(modifiedProductIndex, product);
+
+        // Go back to Main Form after Product is added
+        scene = FXMLLoader.load(getClass().getResource("/view/MainForm.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
     }
 
     @Override
@@ -137,7 +167,7 @@ public class ModifyProductController implements Initializable {
         AllPartsPricePerUnit.setCellValueFactory(new PropertyValueFactory<>("price"));
 
         // Populate Associated Parts table
-        AssociatedPartsTable.setItems(associatedParts);
+        AssociatedPartsTable.setItems(Inventory.getAllProducts().get(modifiedProductIndex).getAllAssociatedParts());
         AssociatedPartID.setCellValueFactory(new PropertyValueFactory<>("id"));;
         AssociatedPartName.setCellValueFactory(new PropertyValueFactory<>("name"));
         AssociatedPartInventoryLevel.setCellValueFactory(new PropertyValueFactory<>("stock"));
