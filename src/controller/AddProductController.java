@@ -3,8 +3,10 @@ package controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -14,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.Inventory;
 import model.Part;
+import model.Product;
 
 import java.io.IOException;
 import java.net.URL;
@@ -130,8 +133,25 @@ public class AddProductController implements Initializable {
     }
 
     @FXML
-    void saveProduct(MouseEvent event) {
+    void saveProduct(MouseEvent event) throws IOException {
+        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
 
+        // Call getLastId (passing in 1 for Product) to get the last product's index
+        int productID = Inventory.getLastId(1) + 1;
+        // Capture user input:
+        String productName = NameAddProductText.getText();
+        double productPrice = Double.parseDouble(PriceCostAddProductText.getText());
+        int productStock = Integer.parseInt(InventoryAddProductText.getText());
+        int productMin = Integer.parseInt(MinAddProductText.getText());
+        int productMax = Integer.parseInt(MaxAddProductText.getText());
+        // Create a new Product instance using user input and add it to the Inventory
+        Product product = new Product(productID, productName, productPrice, productStock, productMin, productMax);
+        Inventory.addProduct(product);
+
+        // Go back to Main Form after Product is added
+        scene = FXMLLoader.load(getClass().getResource("/view/MainForm.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
     }
 
     @Override
