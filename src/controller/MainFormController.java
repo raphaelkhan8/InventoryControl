@@ -123,9 +123,9 @@ public class MainFormController implements Initializable {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
         Part part = partsTable.getSelectionModel().getSelectedItem();
         String deletedName = part.getName();
-        String deletedPartAlert = deletedName += " has been deleted";
+        Inventory.confirmMessage("Confirm", "Confirm Part Deletion", "Are you sure you want to delete " + deletedName + "?");
         Inventory.deletePart(part);
-        Inventory.alertMessage("Deleted", "Part Deleted", deletedPartAlert);
+        Inventory.alertMessage("Deleted", "Part Deleted", deletedName + " has been deleted");
     }
 
     @FXML
@@ -134,9 +134,9 @@ public class MainFormController implements Initializable {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
         Product product = productTable.getSelectionModel().getSelectedItem();
         String deletedName = product.getName();
-        String deletedProductAlert = deletedName += " has been deleted";
+        Inventory.confirmMessage("Confirm", "Confirm Product Deletion", "Are you sure you want to delete " + deletedName + "?");
         Inventory.deleteProduct(product);
-        Inventory.alertMessage("Deleted", "Product Deleted", deletedProductAlert);
+        Inventory.alertMessage("Deleted", "Product Deleted", deletedName + " has been deleted");
     }
 
     @FXML
