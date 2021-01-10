@@ -129,7 +129,11 @@ public class AddProductController implements Initializable {
     @FXML
     void removePart(MouseEvent event) {
         Part removedPart = AssociatedPartsTable.getSelectionModel().getSelectedItem();
+        String name = removedPart.getName();
+        Inventory.confirmMessage("Removal", "Removal Confirmation", "Are you sure you want to remove the associated part?");
         associatedParts.remove(removedPart);
+        Inventory.alertMessage("Removed", "Part successfully removed", name + " was successfully removed.");
+
     }
 
     @FXML
