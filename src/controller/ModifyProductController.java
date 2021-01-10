@@ -150,9 +150,22 @@ public class ModifyProductController implements Initializable {
         int productStock = Integer.parseInt(InventoryModifyProductText.getText());
         int productMin = Integer.parseInt(MinModifyProductText.getText());
         int productMax = Integer.parseInt(MaxModifyProductText.getText());
-        // Create a new Product instance using user input and replace the old one with new one
-        Product product = new Product(productID, productName, productPrice, productStock, productMin, productMax);
-        Inventory.updateProduct(modifiedProductIndex, product);
+
+        // Input validation
+        try {
+            if (productMin > productMax) {
+                Inventory.alertMessage("Error", "Min/Max Error", "Min must be less than Max. Please try again.");
+            }
+            else if (productStock < productMin || productStock > productMax) {
+                Inventory.alertMessage("Error", "Inventory Error", "Inventory amount must be in-between Min and Max.");
+            } else {
+                // Create a new Product instance using user input and replace the old one with new one
+                Product product = new Product(productID, productName, productPrice, productStock, productMin, productMax);
+                Inventory.updateProduct(modifiedProductIndex, product);
+            }
+        } catch(NumberFormatException e) {
+            Inventory.alertMessage("Error", "Error Adding Product", "One or more empty or invalid fields. Please try again.");
+        }
 
         // Go back to Main Form after Product is added
         scene = FXMLLoader.load(getClass().getResource("/view/MainForm.fxml"));

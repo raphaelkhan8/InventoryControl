@@ -6,7 +6,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.InHouse;
@@ -93,18 +92,34 @@ public class ModifyPartController implements Initializable {
         int newStock = Integer.parseInt(InventoryModifyPartText.getText());
         int newMin = Integer.parseInt(MinModifyPartText.getText());
         int newMax = Integer.parseInt(MaxModifyPartText.getText());
-        // If current view is InHouse, create a new InHouse instance and replace the old InHouse with the new one
-        if (currentView.equals("InHouse")) {
-            int newMachineID = Integer.parseInt(DynamicModifyPartText.getText());
-            InHouse iPart = new InHouse(id, newName, newPrice, newStock, newMin, newMax, newMachineID);
-            Inventory.updatePart(modifiedPartIndex, iPart);
-            Inventory.alertMessage("Modified", "Part Modified", "The In-House Part was modified.");
-        } else {
-            // Else, create a new Outsourced instance and replace old Outsourced with the new one
-            String newCompanyName = DynamicModifyPartText.getText();
-            Outsourced oPart = new Outsourced(id, newName, newPrice, newStock, newMin, newMax, newCompanyName);
-            Inventory.updatePart(modifiedPartIndex, oPart);
-            Inventory.alertMessage("Modified", "Part Modified", "The Outsourced Part was modified.");
+        // Input validation:
+        try {
+            if (newMin > newMax) {
+                Inventory.alertMessage("Error", "Min/Max Error", "Min must be less than Max. Please try again.");
+            }
+            else if (newStock < newMin || newStock > newMin) {
+                Inventory.alertMessage("Error", "Inventory Error", "Inventory amount must be in-between Min and Max.");
+            }
+            // if InHouse radio button clicked:
+            else {
+                // If current view is InHouse, create a new InHouse instance and replace the old InHouse with the new one
+                if (currentView.equals("InHouse")) {
+                    // get the input machine ID number
+                    int newMachineID = Integer.parseInt(DynamicModifyPartText.getText());
+                    // Create a new InHouse instance and add it to Inventory
+                    InHouse iPart = new InHouse(id, newName, newPrice, newStock, newMin, newMax, newMachineID);
+                    Inventory.updatePart(modifiedPartIndex, iPart);
+                    Inventory.alertMessage("Modified", "Part Modified", "The In-House Part was modified.");
+                } else {
+                    // if Outsourced radio button clicked:
+                    String companyName = DynamicModifyPartText.getText();
+                    Outsourced newOPart = new Outsourced(id, newName, newPrice, newStock, newMin, newMax, companyName);
+                    Inventory.addPart(newOPart);
+                    Inventory.alertMessage("Modified", "Part Modified", "The Outsourced Part was modified.");
+                }
+            }
+        } catch (NumberFormatException e) {
+            Inventory.alertMessage("Error", "Error Adding Part", "One or more empty or invalid fields. Please try again.");
         }
         // Go back to Main Form after Part has been modified
         scene = FXMLLoader.load(getClass().getResource("/view/MainForm.fxml"));

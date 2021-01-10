@@ -84,6 +84,7 @@ public class AddPartController {
     @FXML
     void savePart(MouseEvent event) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+
         // Capture user input:
         String partName = new String(NameAddPartText.getText());
         double partPrice = Double.parseDouble(PriceCostAddPartText.getText());
@@ -92,21 +93,36 @@ public class AddPartController {
         int partMax = Integer.parseInt(MaxAddPartText.getText());
         // get the last Parts ID # and add 1 to it to create the new part's ID
         int partID = Inventory.getLastId(0) + 1;
-        // if In-House radio button clicked:
-        if (currentView.equals("InHouse")) {
-            // get the input machine ID number
-            int machineId = Integer.parseInt(DynamicAddPartText.getText());
-            // Create a new InHouse instance and add it to Inventory
-            InHouse newIPart = new InHouse(partID, partName, partPrice, partInventory, partMin, partMax, machineId);
-            Inventory.addPart(newIPart);
-            Inventory.alertMessage("Added", "In-House Part Added", partName + " was added to the Inventory");
-        } else {
-            // if Outsourced radio button clicked:
-            String companyName = DynamicAddPartText.getText();
-            Outsourced newOPart = new Outsourced(partID, partName, partPrice, partInventory, partMin, partMax, companyName);
-            Inventory.addPart(newOPart);
-            Inventory.alertMessage("Added", "Outsourced Part Added", partName + " was added to the Inventory");
+
+        // Input validation:
+        try {
+            if (partMin > partMax) {
+                Inventory.alertMessage("Error", "Min/Max Error", "Min must be less than Max. Please try again.");
+            }
+            else if (partInventory < partMin || partInventory > partMax) {
+                Inventory.alertMessage("Error", "Inventory Error", "Inventory amount must be in-between Min and Max.");
+            }
+            // if InHouse radio button clicked:
+            else {
+                if (currentView.equals("InHouse")) {
+                    // get the input machine ID number
+                    int machineId = Integer.parseInt(DynamicAddPartText.getText());
+                    // Create a new InHouse instance and add it to Inventory
+                    InHouse newIPart = new InHouse(partID, partName, partPrice, partInventory, partMin, partMax, machineId);
+                    Inventory.addPart(newIPart);
+                    Inventory.alertMessage("Added", "In-House Part Added", partName + " was added to the Inventory");
+                } else {
+                    // if Outsourced radio button clicked:
+                    String companyName = DynamicAddPartText.getText();
+                    Outsourced newOPart = new Outsourced(partID, partName, partPrice, partInventory, partMin, partMax, companyName);
+                    Inventory.addPart(newOPart);
+                    Inventory.alertMessage("Added", "Outsourced Part Added", partName + " was added to the Inventory");
+                }
+            }
+        } catch (NumberFormatException e) {
+            Inventory.alertMessage("Error", "Error Adding Part", "One or more empty or invalid fields. Please try again.");
         }
+
         // go back to main form after the Part is added
         scene = FXMLLoader.load(getClass().getResource("/view/MainForm.fxml"));
         stage.setScene(new Scene(scene));
