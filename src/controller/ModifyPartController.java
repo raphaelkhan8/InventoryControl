@@ -23,6 +23,8 @@ public class ModifyPartController implements Initializable {
     Stage stage;
     Parent scene;
     String currentView;
+    // modified part's index
+    int modifiedPartIndex = MainFormController.chosenIndex;
 
     @FXML
     private RadioButton InHouseRadioButton;
@@ -83,14 +85,37 @@ public class ModifyPartController implements Initializable {
 
     @FXML
     void savePart(MouseEvent event) throws IOException {
-
+        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+        // capture user input:
+        int id = Integer.parseInt(IDModifyPartText.getText());
+        String newName = NameModifyPartText.getText();
+        double newPrice = Double.parseDouble(PriceCostModifyPartText.getText());
+        int newStock = Integer.parseInt(InventoryModifyPartText.getText());
+        int newMin = Integer.parseInt(MinModifyPartText.getText());
+        int newMax = Integer.parseInt(MaxModifyPartText.getText());
+        // If current view is InHouse, create a new InHouse instance and replace the old InHouse with the new one
+        if (currentView.equals("InHouse")) {
+            int newMachineID = Integer.parseInt(DynamicModifyPartText.getText());
+            InHouse iPart = new InHouse(id, newName, newPrice, newStock, newMin, newMax, newMachineID);
+            Inventory.updatePart(modifiedPartIndex, iPart);
+            Inventory.alertMessage("Modified", "Part Modified", "The In-House Part was modified.");
+        } else {
+            // Else, create a new Outsourced instance and replace old Outsourced with the new one
+            String newCompanyName = DynamicModifyPartText.getText();
+            Outsourced oPart = new Outsourced(id, newName, newPrice, newStock, newMin, newMax, newCompanyName);
+            Inventory.updatePart(modifiedPartIndex, oPart);
+            Inventory.alertMessage("Modified", "Part Modified", "The Outsourced Part was modified.");
+        }
+        // Go back to Main Form after Part has been modified
+        scene = FXMLLoader.load(getClass().getResource("/view/MainForm.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
     }
 
     // override JavaFX's initialize to populate modify form with selected Part's data
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        int modifiedPartID = MainFormController.chosenIndex;
-        Part modifiedPart = Inventory.getAllParts().get(modifiedPartID);
+        Part modifiedPart = Inventory.getAllParts().get(modifiedPartIndex);
         IDModifyPartText.setText(Integer.toString(modifiedPart.getId()));
         NameModifyPartText.setText(modifiedPart.getName());
         PriceCostModifyPartText.setText(Double.toString(modifiedPart.getPrice()));
@@ -98,13 +123,15 @@ public class ModifyPartController implements Initializable {
         MinModifyPartText.setText(Integer.toString(modifiedPart.getMin()));
         MaxModifyPartText.setText(Integer.toString(modifiedPart.getMax()));
         if(modifiedPart instanceof InHouse){
+            currentView = "InHouse";
             InHouseRadioButton.setSelected(true);
             DynamicModifyPartLabel.setText("Machine ID");
-            DynamicModifyPartText.setText(Integer.toString(((InHouse)Inventory.getAllParts().get(modifiedPartID)).getMachineId()));
+            DynamicModifyPartText.setText(Integer.toString(((InHouse)Inventory.getAllParts().get(modifiedPartIndex)).getMachineId()));
         } else {
+            currentView = "Outsourced";
             OutsourcedRadioButton.setSelected(true);
             DynamicModifyPartLabel.setText("Company Name");
-            DynamicModifyPartText.setText(((Outsourced)Inventory.getAllParts().get(modifiedPartID)).getCompanyName());
+            DynamicModifyPartText.setText(((Outsourced)Inventory.getAllParts().get(modifiedPartIndex)).getCompanyName());
         }
     }
 

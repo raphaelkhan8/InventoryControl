@@ -64,7 +64,7 @@ public class Inventory {
     }
 
     // Replace the part at the passed-in index of the Parts array with the passed-in selectedPart
-    public void updatePart(int index, Part selectedPart) {
+    public static void updatePart(int index, Part selectedPart) {
         allParts.set(index, selectedPart);
     }
 
