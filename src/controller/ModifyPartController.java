@@ -85,15 +85,17 @@ public class ModifyPartController implements Initializable {
     @FXML
     void savePart(MouseEvent event) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+
         // capture user input:
-        int id = Integer.parseInt(IDModifyPartText.getText());
-        String newName = NameModifyPartText.getText();
-        double newPrice = Double.parseDouble(PriceCostModifyPartText.getText());
-        int newStock = Integer.parseInt(InventoryModifyPartText.getText());
-        int newMin = Integer.parseInt(MinModifyPartText.getText());
-        int newMax = Integer.parseInt(MaxModifyPartText.getText());
-        // Input validation:
         try {
+            int id = Integer.parseInt(IDModifyPartText.getText());
+            String newName = NameModifyPartText.getText();
+            double newPrice = Double.parseDouble(PriceCostModifyPartText.getText());
+            int newStock = Integer.parseInt(InventoryModifyPartText.getText());
+            int newMin = Integer.parseInt(MinModifyPartText.getText());
+            int newMax = Integer.parseInt(MaxModifyPartText.getText());
+
+            // Input validation:
             if (newMin > newMax) {
                 Inventory.alertMessage("Error", "Min/Max Error", "Min must be less than Max. Please try again.");
             }
@@ -110,21 +112,25 @@ public class ModifyPartController implements Initializable {
                     InHouse iPart = new InHouse(id, newName, newPrice, newStock, newMin, newMax, newMachineID);
                     Inventory.updatePart(modifiedPartIndex, iPart);
                     Inventory.alertMessage("Modified", "Part Modified", "The In-House Part was modified.");
+                    // Go back to Main Form after Part has been modified
+                    scene = FXMLLoader.load(getClass().getResource("/view/MainForm.fxml"));
+                    stage.setScene(new Scene(scene));
+                    stage.show();
                 } else {
                     // if Outsourced radio button clicked:
                     String companyName = DynamicModifyPartText.getText();
                     Outsourced newOPart = new Outsourced(id, newName, newPrice, newStock, newMin, newMax, companyName);
                     Inventory.updatePart(modifiedPartIndex, newOPart);
                     Inventory.alertMessage("Modified", "Part Modified", "The Outsourced Part was modified.");
+                    // Go back to Main Form after Part has been modified
+                    scene = FXMLLoader.load(getClass().getResource("/view/MainForm.fxml"));
+                    stage.setScene(new Scene(scene));
+                    stage.show();
                 }
             }
         } catch (NumberFormatException e) {
             Inventory.alertMessage("Error", "Error Adding Part", "One or more empty or invalid fields. Please try again.");
         }
-        // Go back to Main Form after Part has been modified
-        scene = FXMLLoader.load(getClass().getResource("/view/MainForm.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
     }
 
     // override JavaFX's initialize to populate modify form with selected Part's data

@@ -147,15 +147,15 @@ public class AddProductController implements Initializable {
         // Call getLastId (passing in 1 for Product) to get the last product's index
         int productID = Inventory.getLastId(1) + 1;
 
-        // Capture user input:
-        String productName = NameAddProductText.getText();
-        double productPrice = Double.parseDouble(PriceCostAddProductText.getText());
-        int productStock = Integer.parseInt(InventoryAddProductText.getText());
-        int productMin = Integer.parseInt(MinAddProductText.getText());
-        int productMax = Integer.parseInt(MaxAddProductText.getText());
-
-        // Input validation:
         try {
+            // Capture user input:
+            String productName = NameAddProductText.getText();
+            double productPrice = Double.parseDouble(PriceCostAddProductText.getText());
+            int productStock = Integer.parseInt(InventoryAddProductText.getText());
+            int productMin = Integer.parseInt(MinAddProductText.getText());
+            int productMax = Integer.parseInt(MaxAddProductText.getText());
+
+            // Input validation:
             if (productMin > productMax) {
                 Inventory.alertMessage("Error", "Min/Max Error", "Min must be less than Max. Please try again.");
             }
@@ -165,15 +165,14 @@ public class AddProductController implements Initializable {
                 // Create a new Product instance using user input and add it to the Inventory
                 Product product = new Product(productID, productName, productPrice, productStock, productMin, productMax);
                 Inventory.addProduct(product);
+                // Go back to Main Form after Product is added
+                scene = FXMLLoader.load(getClass().getResource("/view/MainForm.fxml"));
+                stage.setScene(new Scene(scene));
+                stage.show();
             }
         } catch (NumberFormatException e) {
             Inventory.alertMessage("Error", "Error Adding Product", "One or more empty or invalid fields. Please try again.");
         }
-
-        // Go back to Main Form after Product is added
-        scene = FXMLLoader.load(getClass().getResource("/view/MainForm.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
     }
 
     @Override
