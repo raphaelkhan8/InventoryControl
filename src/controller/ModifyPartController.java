@@ -96,6 +96,10 @@ public class ModifyPartController implements Initializable {
             int newMax = Integer.parseInt(MaxModifyPartText.getText());
 
             // Input validation:
+            if (newName.isEmpty()) {
+                Inventory.alertMessage("Error", "Name field is blank", "Name must be filled out. Please try again.");
+                return;
+            }
             if (newMin > newMax) {
                 Inventory.alertMessage("Error", "Min/Max Error", "Min must be less than Max. Please try again.");
             }
@@ -128,8 +132,10 @@ public class ModifyPartController implements Initializable {
                     stage.show();
                 }
             }
-        } catch (NumberFormatException e) {
-            Inventory.alertMessage("Error", "Error Adding Part", "One or more empty or invalid fields. Please try again.");
+        }  catch (NumberFormatException e) {
+            Inventory.alertMessage("Error", "Input Field Error", "One or more field inputs are invalid. Please try again.");
+        } catch (NullPointerException e) {
+            Inventory.alertMessage("Error", "Empty Field Error", "One or more fields are empty. Please try again.");
         }
     }
 

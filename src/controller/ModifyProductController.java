@@ -157,6 +157,10 @@ public class ModifyProductController implements Initializable {
             int productMin = Integer.parseInt(MinModifyProductText.getText());
             int productMax = Integer.parseInt(MaxModifyProductText.getText());
             // Input validation
+            if (productName.isEmpty()) {
+                Inventory.alertMessage("Error", "Name field is blank", "Name must be filled out. Please try again.");
+                return;
+            }
             if (productMin > productMax) {
                 Inventory.alertMessage("Error", "Min/Max Error", "Min must be less than Max. Please try again.");
             }
@@ -177,8 +181,10 @@ public class ModifyProductController implements Initializable {
                 stage.setScene(new Scene(scene));
                 stage.show();
             }
-        } catch(NumberFormatException e) {
-            Inventory.alertMessage("Error", "Error Adding Product", "One or more empty or invalid fields. Please try again.");
+        } catch (NullPointerException e) {
+            Inventory.alertMessage("Error", "Empty Field Error", "One or more fields are empty. Please try again.");
+        } catch (NumberFormatException e) {
+            Inventory.alertMessage("Error", "Input Field Error", "One or more field inputs are invalid. Please try again.");
         }
     }
 
