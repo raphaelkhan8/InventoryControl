@@ -138,13 +138,19 @@ public class MainFormController implements Initializable {
         // delete the selected Product from products table and alert user after product is removed
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
         Product product = productTable.getSelectionModel().getSelectedItem();
-        String deletedName = product.getName();
-        AtomicBoolean proceed = Inventory.confirmMessage("Confirm", "Confirm Product Deletion", "Are you sure you want to delete " + deletedName + "?");
-        if (!proceed.get()) {
-            return;
+        int numberOfAssociatedParts = product.getAllAssociatedParts().size();
+        // prevent products with associated parts from being deleted
+        if (numberOfAssociatedParts > 0) {
+            Inventory.alertMessage("Error", "Product contains associated parts", "Delete associated parts before deleting product");
         } else {
-            Inventory.deleteProduct(product);
-            Inventory.alertMessage("Deleted", "Product Deleted", deletedName + " has been deleted");
+            String deletedName = product.getName();
+            AtomicBoolean proceed = Inventory.confirmMessage("Confirm", "Confirm Product Deletion", "Are you sure you want to delete " + deletedName + "?");
+            if (!proceed.get()) {
+                return;
+            } else {
+                Inventory.deleteProduct(product);
+                Inventory.alertMessage("Deleted", "Product Deleted", deletedName + " has been deleted");
+            }
         }
     }
 
