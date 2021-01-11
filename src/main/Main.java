@@ -1,4 +1,4 @@
-// Please see .idea folder for javadocs
+// Please see .idea folder (in root directory) for javadocs
 
 /** RUNTIME ERROR:
  *  One of the more frustrating errors I encountered during this project was the following: java.lang.String cannot be converted to int.
