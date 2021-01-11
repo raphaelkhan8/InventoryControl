@@ -121,14 +121,14 @@ public class ModifyProductController implements Initializable {
     @FXML
     void lookupPart(MouseEvent event) {
         String partToSearch = SearchPartText.getText();
-        ObservableList<Part> foundPartList;
-        foundPartList = Inventory.lookupPart(partToSearch);
-        // if searched Part isn't found, alert the user
-        if(foundPartList.isEmpty()) {
-            Inventory.alertMessage("Error", "Part not found", partToSearch + " was not found :(");
-        } else {
-            AllPartsTable.setItems(foundPartList);
-        }
+            ObservableList<Part> foundPartList;
+            foundPartList = Inventory.lookupPart(partToSearch);
+            // if searched Part isn't found, alert the user
+            if (foundPartList.isEmpty()) {
+                Inventory.alertMessage("Error", "Part not found", partToSearch + " was not found :(");
+            } else {
+                AllPartsTable.setItems(foundPartList);
+            }
     }
 
     @FXML
