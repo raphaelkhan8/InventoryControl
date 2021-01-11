@@ -97,7 +97,7 @@ public class ModifyPartController implements Initializable {
             if (newMin > newMax) {
                 Inventory.alertMessage("Error", "Min/Max Error", "Min must be less than Max. Please try again.");
             }
-            else if (newStock < newMin || newStock > newMin) {
+            else if (newStock < newMin || newStock > newMax) {
                 Inventory.alertMessage("Error", "Inventory Error", "Inventory amount must be in-between Min and Max.");
             }
             // if InHouse radio button clicked:
