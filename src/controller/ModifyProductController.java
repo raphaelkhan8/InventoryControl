@@ -200,7 +200,7 @@ public class ModifyProductController implements Initializable {
         NameModifyProductText.setText(modifiedProduct.getName());
         InventoryModifyProductText.setText(Integer.toString(modifiedProduct.getStock()));
         PriceCostModifyProductText.setText(Double.toString(modifiedProduct.getPrice()));
-        MinModifyProductText.setText(Integer.toString(modifiedProduct.getMax()));
-        MaxModifyProductText.setText(Integer.toString(modifiedProduct.getMin()));
+        MinModifyProductText.setText(Integer.toString(modifiedProduct.getMin()));
+        MaxModifyProductText.setText(Integer.toString(modifiedProduct.getMax()));
     }
 }
