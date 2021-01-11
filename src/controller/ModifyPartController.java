@@ -114,7 +114,7 @@ public class ModifyPartController implements Initializable {
                     // if Outsourced radio button clicked:
                     String companyName = DynamicModifyPartText.getText();
                     Outsourced newOPart = new Outsourced(id, newName, newPrice, newStock, newMin, newMax, companyName);
-                    Inventory.addPart(newOPart);
+                    Inventory.updatePart(modifiedPartIndex, newOPart);
                     Inventory.alertMessage("Modified", "Part Modified", "The Outsourced Part was modified.");
                 }
             }
