@@ -21,6 +21,7 @@ import model.Product;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class AddProductController implements Initializable {
 
@@ -130,10 +131,13 @@ public class AddProductController implements Initializable {
     void removePart(MouseEvent event) {
         Part removedPart = AssociatedPartsTable.getSelectionModel().getSelectedItem();
         String name = removedPart.getName();
-        Inventory.confirmMessage("Removal", "Removal Confirmation", "Are you sure you want to remove the associated part?");
-        associatedParts.remove(removedPart);
-        Inventory.alertMessage("Removed", "Part successfully removed", name + " was successfully removed.");
-
+        AtomicBoolean proceed = Inventory.confirmMessage("Removal", "Removal Confirmation", "Are you sure you want to remove the associated part?");
+        if (!proceed.get()) {
+            return;
+        } else {
+            associatedParts.remove(removedPart);
+            Inventory.alertMessage("Removed", "Part successfully removed", name + " was successfully removed.");
+        }
     }
 
     @FXML

@@ -17,6 +17,7 @@ import model.Product;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class MainFormController implements Initializable {
 
@@ -123,9 +124,13 @@ public class MainFormController implements Initializable {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
         Part part = partsTable.getSelectionModel().getSelectedItem();
         String deletedName = part.getName();
-        Inventory.confirmMessage("Confirm", "Confirm Part Deletion", "Are you sure you want to delete " + deletedName + "?");
-        Inventory.deletePart(part);
-        Inventory.alertMessage("Deleted", "Part Deleted", deletedName + " has been deleted");
+        AtomicBoolean proceed = Inventory.confirmMessage("Confirm", "Confirm Part Deletion", "Are you sure you want to delete " + deletedName + "?");
+        if (!proceed.get()) {
+            return;
+        } else {
+            Inventory.deletePart(part);
+            Inventory.alertMessage("Deleted", "Part Deleted", deletedName + " has been deleted");
+        }
     }
 
     @FXML
@@ -134,9 +139,13 @@ public class MainFormController implements Initializable {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
         Product product = productTable.getSelectionModel().getSelectedItem();
         String deletedName = product.getName();
-        Inventory.confirmMessage("Confirm", "Confirm Product Deletion", "Are you sure you want to delete " + deletedName + "?");
-        Inventory.deleteProduct(product);
-        Inventory.alertMessage("Deleted", "Product Deleted", deletedName + " has been deleted");
+        AtomicBoolean proceed = Inventory.confirmMessage("Confirm", "Confirm Product Deletion", "Are you sure you want to delete " + deletedName + "?");
+        if (!proceed.get()) {
+            return;
+        } else {
+            Inventory.deleteProduct(product);
+            Inventory.alertMessage("Deleted", "Product Deleted", deletedName + " has been deleted");
+        }
     }
 
     @FXML
