@@ -163,8 +163,14 @@ public class ModifyProductController implements Initializable {
             else if (productStock < productMin || productStock > productMax) {
                 Inventory.alertMessage("Error", "Inventory Error", "Inventory amount must be in-between Min and Max.");
             } else {
-                // Create a new Product instance using user input and replace the old one with new one
+                // Create a new Product instance using user input
                 Product product = new Product(productID, productName, productPrice, productStock, productMin, productMax);
+                // Loop through current product and add all it's associated parts to new Product
+                ObservableList<Part> partsList = Inventory.getAllProducts().get(modifiedProductIndex).getAllAssociatedParts();
+                for (Part part : partsList) {
+                    product.addAssociatedPart(part);
+                }
+                // Update current product with new one
                 Inventory.updateProduct(modifiedProductIndex, product);
                 // Go back to Main Form after Product is added
                 scene = FXMLLoader.load(getClass().getResource("/view/MainForm.fxml"));
