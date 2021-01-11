@@ -1,9 +1,11 @@
 package model;
 
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Inventory {
     private static ObservableList<Part> allParts = FXCollections.observableArrayList();
@@ -116,11 +118,16 @@ public class Inventory {
     }
 
     // pop-up to confirm deletion of data
-    public static void confirmMessage(String title, String header, String message) {
+    public static AtomicBoolean confirmMessage(String title, String header, String message) {
+        AtomicBoolean proceed = new AtomicBoolean(false);
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle(title);
         alert.setHeaderText(header);
         alert.setContentText(message);
-        alert.showAndWait();
+        alert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                proceed.set(true);
+            }});
+        return proceed;
     }
 }
