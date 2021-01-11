@@ -85,17 +85,17 @@ public class AddPartController {
     void savePart(MouseEvent event) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
 
-        // Capture user input:
-        String partName = new String(NameAddPartText.getText());
-        double partPrice = Double.parseDouble(PriceCostAddPartText.getText());
-        int partInventory = Integer.parseInt(InventoryAddPartText.getText());
-        int partMin = Integer.parseInt(MinAddPartText.getText());
-        int partMax = Integer.parseInt(MaxAddPartText.getText());
-        // get the last Parts ID # and add 1 to it to create the new part's ID
-        int partID = Inventory.getLastId(0) + 1;
-
-        // Input validation:
         try {
+            // Capture user input:
+            String partName = new String(NameAddPartText.getText());
+            double partPrice = Double.parseDouble(PriceCostAddPartText.getText());
+            int partInventory = Integer.parseInt(InventoryAddPartText.getText());
+            int partMin = Integer.parseInt(MinAddPartText.getText());
+            int partMax = Integer.parseInt(MaxAddPartText.getText());
+            // get the last Parts ID # and add 1 to it to create the new part's ID
+            int partID = Inventory.getLastId(0) + 1;
+
+            // Input validation:
             if (partMin > partMax) {
                 Inventory.alertMessage("Error", "Min/Max Error", "Min must be less than Max. Please try again.");
             }
@@ -111,22 +111,25 @@ public class AddPartController {
                     InHouse newIPart = new InHouse(partID, partName, partPrice, partInventory, partMin, partMax, machineId);
                     Inventory.addPart(newIPart);
                     Inventory.alertMessage("Added", "In-House Part Added", partName + " was added to the Inventory");
+                    // go back to main form after the Part is added
+                    scene = FXMLLoader.load(getClass().getResource("/view/MainForm.fxml"));
+                    stage.setScene(new Scene(scene));
+                    stage.show();
                 } else {
                     // if Outsourced radio button clicked:
                     String companyName = DynamicAddPartText.getText();
                     Outsourced newOPart = new Outsourced(partID, partName, partPrice, partInventory, partMin, partMax, companyName);
                     Inventory.addPart(newOPart);
                     Inventory.alertMessage("Added", "Outsourced Part Added", partName + " was added to the Inventory");
+                    // go back to main form after the Part is added
+                    scene = FXMLLoader.load(getClass().getResource("/view/MainForm.fxml"));
+                    stage.setScene(new Scene(scene));
+                    stage.show();
                 }
             }
         } catch (NumberFormatException e) {
             Inventory.alertMessage("Error", "Error Adding Part", "One or more empty or invalid fields. Please try again.");
         }
-
-        // go back to main form after the Part is added
-        scene = FXMLLoader.load(getClass().getResource("/view/MainForm.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
     }
 
 }

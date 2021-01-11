@@ -148,16 +148,15 @@ public class ModifyProductController implements Initializable {
     void saveProduct(MouseEvent event) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
 
-        // Capture user input:
-        int productID = Integer.parseInt(IDModifyProductText.getText());
-        String productName = NameModifyProductText.getText();
-        double productPrice = Double.parseDouble(PriceCostModifyProductText.getText());
-        int productStock = Integer.parseInt(InventoryModifyProductText.getText());
-        int productMin = Integer.parseInt(MinModifyProductText.getText());
-        int productMax = Integer.parseInt(MaxModifyProductText.getText());
-
-        // Input validation
         try {
+            // Capture user input:
+            int productID = Integer.parseInt(IDModifyProductText.getText());
+            String productName = NameModifyProductText.getText();
+            double productPrice = Double.parseDouble(PriceCostModifyProductText.getText());
+            int productStock = Integer.parseInt(InventoryModifyProductText.getText());
+            int productMin = Integer.parseInt(MinModifyProductText.getText());
+            int productMax = Integer.parseInt(MaxModifyProductText.getText());
+            // Input validation
             if (productMin > productMax) {
                 Inventory.alertMessage("Error", "Min/Max Error", "Min must be less than Max. Please try again.");
             }
@@ -167,15 +166,14 @@ public class ModifyProductController implements Initializable {
                 // Create a new Product instance using user input and replace the old one with new one
                 Product product = new Product(productID, productName, productPrice, productStock, productMin, productMax);
                 Inventory.updateProduct(modifiedProductIndex, product);
+                // Go back to Main Form after Product is added
+                scene = FXMLLoader.load(getClass().getResource("/view/MainForm.fxml"));
+                stage.setScene(new Scene(scene));
+                stage.show();
             }
         } catch(NumberFormatException e) {
             Inventory.alertMessage("Error", "Error Adding Product", "One or more empty or invalid fields. Please try again.");
         }
-
-        // Go back to Main Form after Product is added
-        scene = FXMLLoader.load(getClass().getResource("/view/MainForm.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
     }
 
     @Override
