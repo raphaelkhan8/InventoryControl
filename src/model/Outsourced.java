@@ -15,12 +15,12 @@ public class Outsourced extends Part {
         setMax(max);
     }
 
-    /// Setter ///
+    /** Setter */
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
     }
 
-    /// Getter ///
+    /** Getter */
     public String getCompanyName() {
         return this.companyName;
     }

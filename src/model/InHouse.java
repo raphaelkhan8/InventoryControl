@@ -15,12 +15,12 @@ public class InHouse extends Part {
         setMax(max);
     }
 
-    /// Setter ///
+    /** Setter */
     public void setMachineId(int machineId) {
         this.machineId = machineId;
     }
 
-    /// Getter ///
+    /** Getter */
     public int getMachineId() {
         return this.machineId;
     }

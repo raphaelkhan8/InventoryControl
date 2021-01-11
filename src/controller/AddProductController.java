@@ -98,11 +98,13 @@ public class AddProductController implements Initializable {
     private Button AddProductSearchButton;
 
     @FXML
+    /** clear the search bar when the mouse is clicked */
     void clearText(MouseEvent event) {
         SearchPartText.setText("");
     }
 
     @FXML
+    /** Go back to Main Form when Cancel button is clicked */
     void cancelView(MouseEvent event) throws IOException {
         AddPartController controller = new AddPartController();
         controller.cancelView(event);

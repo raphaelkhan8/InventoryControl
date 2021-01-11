@@ -39,12 +39,12 @@ public class Product {
     public int getMin() { return min; }
     public int getMax() { return max; }
 
-    // add Part to Product
+    /** Add Part to Product */
     public void addAssociatedPart(Part part) {
         associatedParts.add(part);
     }
 
-    // delete Part from Product if it is in associatedParts array
+    /** Delete Part from Product if it is in associatedParts array */
     public boolean deleteAssociatedPart(Part part) {
         if (associatedParts.contains(part)) {
             associatedParts.remove(part);
@@ -54,7 +54,7 @@ public class Product {
         }
     }
 
-    // return a list of all Parts in Product
+    /** Return a list of all Parts in Product */
     public ObservableList<Part> getAllAssociatedParts() {
         return this.associatedParts;
     }

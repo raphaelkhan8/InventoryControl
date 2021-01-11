@@ -59,22 +59,22 @@ public class AddPartController {
     private TextField DynamicAddPartText;
 
     @FXML
-    // When In-House radio button is clicked, set label to Machine ID
+    /** When In-House radio button is clicked, set label to Machine ID */
     void InHouseHandler(MouseEvent event) {
         DynamicAddPartLabel.setText("Machine ID");
         currentView = "InHouse";
     }
 
     @FXML
-    // When Outsourced radio button is clicked, set label to Company Name
+    /** When Outsourced radio button is clicked, set label to Company Name */
     void OutsourcedHandler(MouseEvent event) {
         DynamicAddPartLabel.setText("Company Name");
         currentView = "Outsourced";
     }
 
     @FXML
+    /** Go back to Main Form when Cancel button is clicked */
     void cancelView(MouseEvent event) throws IOException {
-        // go back to Main Form when Cancel button is clicked
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/MainForm.fxml"));
         stage.setScene(new Scene(scene));
