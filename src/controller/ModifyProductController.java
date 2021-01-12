@@ -120,15 +120,38 @@ public class ModifyProductController implements Initializable {
 
     @FXML
     void lookupPart(MouseEvent event) {
+        // capture user input
         String partToSearch = SearchPartText.getText();
-            ObservableList<Part> foundPartList;
-            foundPartList = Inventory.lookupPart(partToSearch);
-            // if searched Part isn't found, alert the user
+        // container for found Parts
+        ObservableList<Part> foundPartList = FXCollections.observableArrayList();
+        // if search input is empty, re-populate table with all Parts
+        if (partToSearch.isEmpty()) {
+            AllPartsTable.setItems(Inventory.getAllParts());
+        }
+        try {
+            // if search input starts with a number, use the ID lookupParts method
+            if (Character.isDigit(partToSearch.charAt(0))) {
+                Part part = Inventory.lookupPart(Integer.parseInt(partToSearch));
+                if (!part.getName().isEmpty()) {
+                    foundPartList.add(Inventory.lookupPart(Integer.parseInt(partToSearch)));
+                }
+            }
+            // else (if search input is a string), use the Name lookupParts method
+            else {
+                foundPartList = Inventory.lookupPart(partToSearch);
+            }
+            // alert the user that the input Part was not found
             if (foundPartList.isEmpty()) {
-                Inventory.alertMessage("Error", "Part not found", partToSearch + " was not found :(");
+                String nameSearchErrorText = "The part with name " + partToSearch + " was not found";
+                Inventory.alertMessage("Error", "Part not Found :(", nameSearchErrorText);
+                // if Part is found, populate Parts table with only the found like-Part(s)
             } else {
                 AllPartsTable.setItems(foundPartList);
             }
+        } catch (NullPointerException e) {
+            String idSearchErrorText = "The part with id " + partToSearch + " was not found";
+            Inventory.alertMessage("Error", "Part not Found :(", idSearchErrorText);
+        }
     }
 
     @FXML
