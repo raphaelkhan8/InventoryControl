@@ -33,7 +33,7 @@ public class Inventory {
     }
 
     /** Loop through Products array and return the product if it's id matches the passed-in product */
-    public Product lookupProduct(int productId) {
+    public static Product lookupProduct(int productId) {
         for (Product product : allProducts) {
             int id = product.getId();
             if (id == productId) {
@@ -45,13 +45,9 @@ public class Inventory {
 
     /** Loop through Parts array and return the part (as an array) if it's name matches the passed-in name */
     public static ObservableList<Part> lookupPart(String partName) {
-        // if search bar is empty, return all parts
-        if (partName.length() == 0) {
-            return allParts;
-        }
         ObservableList<Part> foundParts = FXCollections.observableArrayList();
         for (Part part: allParts) {
-            if (part.getName().equals(partName)) {
+            if (part.getName().contains(partName)) {
                 foundParts.add(part);
             }
         }
@@ -60,13 +56,9 @@ public class Inventory {
 
     /** Loop through Products array and return the product (as an array) if it's name matches the passed-in name */
     public static ObservableList<Product> lookupProduct(String productName) {
-        // if search bar is empty, return all products
-        if (productName.length() == 0) {
-            return allProducts;
-        }
         ObservableList<Product> foundProducts = FXCollections.observableArrayList();
         for (Product product: allProducts) {
-            if (product.getName().equals(productName)) {
+            if (product.getName().contains(productName)) {
                 foundProducts.add(product);
             }
         }

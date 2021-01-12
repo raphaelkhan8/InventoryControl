@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -184,37 +185,77 @@ public class MainFormController implements Initializable {
 
     @FXML
     void searchPart(MouseEvent event) {
+        // Container for search output
+        ObservableList<Part> foundPart = FXCollections.observableArrayList();
         // Parts Table search box functionality:
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
         // Capture search box input
         String partSearchInput = partSearchInputBox.getText();
-        // Container for search output:
-        ObservableList<Part> foundPart = Inventory.lookupPart(partSearchInput);
-        // if Part is found, populate Parts table with only the found Part
-        if (!foundPart.isEmpty()) {
-            partsTable.setItems(foundPart);
-            // else, alert the user that the input Part was not found
-        } else {
-            String partSearchErrorText = partSearchInput + " was not found";
-            Inventory.alertMessage("Error", "Part not Found :(", partSearchErrorText);
+        // if the search input is empty, re-populate parts table with all available Parts
+        if (partSearchInput.isEmpty()) {
+            partsTable.setItems(Inventory.getAllParts());
+        }
+        try {
+            // if search input starts with a number, use the ID lookupParts method
+            if (Character.isDigit(partSearchInput.charAt(0))) {
+                Part part = Inventory.lookupPart(Integer.parseInt(partSearchInput));
+                if (!part.getName().isEmpty()) {
+                    foundPart.add(Inventory.lookupPart(Integer.parseInt(partSearchInput)));
+                }
+            }
+            // else (if search input is a string), use the Name lookupParts method
+            else {
+                foundPart = Inventory.lookupPart(partSearchInput);
+            }
+            // alert the user that the input Part was not found
+            if (foundPart.isEmpty()) {
+                String nameSearchErrorText = "The part with name " + partSearchInput + " was not found";
+                Inventory.alertMessage("Error", "Part not Found :(", nameSearchErrorText);
+            // if Part is found, populate Parts table with only the found like-Part(s)
+            } else {
+                partsTable.setItems(foundPart);
+            }
+        } catch (NullPointerException e) {
+            String idSearchErrorText = "The part with id " + partSearchInput + " was not found";
+            Inventory.alertMessage("Error", "Part not Found :(", idSearchErrorText);
         }
     }
 
     @FXML
     void searchProduct(MouseEvent event) {
+        // Container for search output:
+        ObservableList<Product> foundProduct = FXCollections.observableArrayList();
         // Products Table search box functionality:
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
         // Capture search box input
         String productSearchInput = productSearchInputBox.getText();
-        // Container for search output:
-        ObservableList<Product> foundProduct = Inventory.lookupProduct(productSearchInput);
-        // if Product is found, populate Products table with only the found Product
-        if (!foundProduct.isEmpty()) {
-            productTable.setItems(foundProduct);
-            // else, alert the user that the input Product was not found
-        } else {
-            String productSearchErrorText = productSearchInput + " was not found";
-            Inventory.alertMessage("Error", "Product not Found :(", productSearchErrorText);
+        // if the search input is empty, re-populate products table with all available Products
+        if (productSearchInput.isEmpty()) {
+            productTable.setItems(Inventory.getAllProducts());
+        }
+        try {
+            // if search input starts with a number, use the ID lookupProduct method
+            if (Character.isDigit(productSearchInput.charAt(0))) {
+                Product product = Inventory.lookupProduct(Integer.parseInt(productSearchInput));
+                if (!product.getName().isEmpty()) {
+                    foundProduct.add(Inventory.lookupProduct(Integer.parseInt(productSearchInput)));
+                }
+            }
+            // else (if search input is a string), use the Name lookupProduct method
+            else {
+                foundProduct = Inventory.lookupProduct(productSearchInput);
+            }
+            // alert the user that the input Product was not found
+            if (foundProduct.isEmpty()) {
+                String nameSearchErrorText = "The product with name " + productSearchInput + " was not found";
+                Inventory.alertMessage("Error", "Product not Found :(", nameSearchErrorText);
+                // if Product is found, populate Products table with only the found like-Product(s)
+            } else {
+                productTable.setItems(foundProduct);
+            }
+        } catch (NullPointerException e) {
+            String idSearchErrorText = "The product with id " + productSearchInput + " was not found";
+            Inventory.alertMessage("Error", "Product not Found :(", idSearchErrorText);
         }
     }
 
