@@ -1,17 +1,4 @@
-// Please see .idea folder (in root directory) for javadocs
-
-/** RUNTIME ERROR:
- *  One of the more frustrating errors I encountered during this project was the following: java.lang.String cannot be converted to int.
- *  When trying to capture input form data, I had to convert most of the text responses to integers. A simple type casting would not work
- *  and resulted in the same error. Thanks to StackOverflow I found the solution was to use the Integer class's parseInt() method.
- *  After wrapping the text input in Integer.parseInt(), I got my ints and the errors disappeared!
- * /
-
- /** FUTURE ENHANCEMENT:
- *   A future enhancement would be to add more parent classes (factory, business, pod/space, etc) in order to make this a full-scale inventory app.
- *   A Factory or Business class would encompass multiple Pod or Space classes which would contain multiple Inventories. Extending this functionality
- *   would require more complicated business logic as well as implementing a database in order to persist data.
- */
+// Please see the javadoc folder (in root directory) for javadocs
 
 package main;
 
@@ -23,6 +10,19 @@ import javafx.stage.Stage;
 import model.*;
 
 public class Main extends Application {
+
+    /** RUNTIME ERROR:
+     *  One of the more frustrating errors I encountered during this project was the following: java.lang.String cannot be converted to int.
+     *  When trying to capture input form data, I had to convert most of the text responses to integers. A simple type casting would not work
+     *  and resulted in the same error. Thanks to StackOverflow I found the solution was to use the Integer class's parseInt() method.
+     *  After wrapping the text input in Integer.parseInt(), I got my ints and the errors disappeared!
+     * /
+
+     /** FUTURE ENHANCEMENT:
+     *   A future enhancement would be to add more parent classes (factory, business, pod/space, etc) in order to make this a full-scale inventory app.
+     *   A Factory or Business class would encompass multiple Pod or Space classes which would contain multiple Inventories. Extending this functionality
+     *   would require more complicated business logic as well as implementing a database in order to persist data.
+     */
 
     Inventory sampleInv = new Inventory();
 
